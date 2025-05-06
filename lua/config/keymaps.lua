@@ -3,3 +3,6 @@
 -- Add any additional keymaps here
 
 -- Map 'jk' to escape from Insert mode to Normal mode:
+
+
+-- Snacks Explorer

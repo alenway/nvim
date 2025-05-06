@@ -6,3 +6,8 @@
 
 -- Disable relative numbering
 vim.o.relativenumber = false
+
+--word wrap
+vim.opt.wrap = true -- or false to disable wrap
+
+vim.cmd("highlight Cursor guibg=yellow guifg=#ff0000") -- Example: White background, red foreground
