@@ -3,6 +3,10 @@
 -- Add any additional keymaps here
 
 -- Map 'jk' to escape from Insert mode to Normal mode:
-
+vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true, silent = true })
 
 -- Snacks Explorer
+
+-- git ui terminal keybinding
+
+vim.api.nvim_set_keymap("n", "<leader>gu", ":terminal gitui<CR>", { noremap = true, silent = true })
