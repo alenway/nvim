@@ -39,7 +39,6 @@ return {
     },
     explorer = {
       replace_netrw = false, -- don’t override netrw to avoid auto-opening
-      show_hidden = true, -- show didden files
     },
     picker = {
       sources = {
