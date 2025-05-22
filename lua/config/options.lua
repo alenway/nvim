@@ -11,3 +11,5 @@ vim.o.relativenumber = false
 vim.opt.wrap = true -- or false to disable wrap
 
 vim.cmd("highlight Cursor guibg=yellow guifg=#ff0000") -- Example: White background, red foreground
+
+-- Catppuccin theme
