@@ -75,7 +75,7 @@ return {
         theme = catppuccin_custom,
         icons_enabled = true,
         section_separators = { left = "", right = "" },
-        component_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
         globalstatus = true,
         disabled_filetypes = {
           statusline = { "alpha", "dashboard" },
@@ -148,11 +148,12 @@ return {
             sources = { "nvim_diagnostic" },
             sections = { "error", "warn", "info", "hint" },
             symbols = {
-              error = " ",
-              warn = " ",
-              info = " ",
-              hint = "󰌵 ",
+              error = " ", -- or 󰅙
+              warn = " ", -- or 󰀦
+              info = " ", -- or 󰋽
+              hint = " ", -- or 󰌵
             },
+
             diagnostics_color = {
               error = { fg = colors.red },
               warn = { fg = colors.yellow },
@@ -191,14 +192,14 @@ return {
             "fileformat",
             symbols = { unix = "󰻀", dos = "󰨡", mac = "󰀵" },
             color = { fg = colors.sky },
-            padding = { left = 0, right = 0 },
+            padding = { left = 1, right = 0 },
           },
           {
             "filetype",
             icon_only = false,
             icon = { align = "right" },
             color = { fg = colors.lavender, gui = "bold" },
-            separator = { right = "" },
+            separator = { left = "", right = "" },
             padding = { left = 1, right = 1 },
           },
         },
