@@ -100,9 +100,9 @@ return {
                 VISUAL = "󰈈 VIS",
                 ["V-LINE"] = "󰈈 V-L",
                 ["V-BLOCK"] = "󰈈 V-B",
-                COMMAND = " CMD",
+                COMMAND = "󰘳 CMD",
                 REPLACE = "󰛔 REP",
-                TERMINAL = " TER",
+                TERMINAL = " TER",
                 SELECT = "󰒅 SEL",
               }
               return map[str] or str
