@@ -4,6 +4,7 @@
 
 -- Map 'jk' to escape from Insert mode to Normal mode:
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
 
 -- Snacks Explorer
 
@@ -33,6 +34,6 @@ vim.keymap.set("n", "<leader>ry", function()
   vim.cmd("botright split")
   vim.cmd("enew") -- create a new, empty, unmodified buffer
   vim.cmd("setlocal nobuflisted bufhidden=wipe")
-  vim.fn.termopen("yazi")
+  vim.cmd("terminal yazi")
   vim.cmd("startinsert")
 end, { desc = "Open Yazi in terminal" })
