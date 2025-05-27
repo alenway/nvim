@@ -106,7 +106,7 @@ return {
                 ["V-BLOCK"] = "󰈈 V-B",
                 COMMAND = "󰘳 CMD",
                 REPLACE = "󰛔 REP",
-                TERMINAL = " TER",
+                TERMINAL = "󰞷 TER", -- Added terminal symbol here
                 SELECT = "󰒅 SEL",
               }
               return map[str] or str
@@ -145,7 +145,7 @@ return {
               newfile = " ",
             },
             color = { fg = colors.text, gui = "italic" },
-            padding = { left = 1, right = 0 },
+            padding = { left = 1, right = 1 },
             separator = { left = left_sep, right = right_sep },
           },
           {
