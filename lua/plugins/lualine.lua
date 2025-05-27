@@ -1,3 +1,6 @@
+local left_sep = ""
+local right_sep = ""
+
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
@@ -74,13 +77,14 @@ return {
       options = {
         theme = catppuccin_custom,
         icons_enabled = true,
-        section_separators = { left = "", right = "" },
-        component_separators = { left = "", right = "" },
+        section_separators = { left = left_sep, right = right_sep },
+        component_separators = { left = left_sep, right = right_sep },
         globalstatus = true,
         disabled_filetypes = {
           statusline = { "alpha", "dashboard" },
           winbar = {},
         },
+        ignore_focus = { "neo-tree", "nvim-tree" },
         refresh = {
           statusline = 1000,
           tabline = 1000,
@@ -91,7 +95,7 @@ return {
         lualine_a = {
           {
             "mode",
-            separator = { left = "", right = "" },
+            separator = { left = left_sep, right = right_sep },
             padding = { left = 1, right = 1 },
             fmt = function(str)
               local map = {
@@ -102,7 +106,7 @@ return {
                 ["V-BLOCK"] = "󰈈 V-B",
                 COMMAND = "󰘳 CMD",
                 REPLACE = "󰛔 REP",
-                TERMINAL = " TER",
+                TERMINAL = " TER",
                 SELECT = "󰒅 SEL",
               }
               return map[str] or str
@@ -112,7 +116,7 @@ return {
         lualine_b = {
           {
             "branch",
-            separator = { right = "" },
+            separator = { left = left_sep, right = right_sep },
             padding = { left = 1, right = 1 },
             color = { gui = "bold" },
           },
@@ -124,7 +128,7 @@ return {
               modified = { fg = colors.yellow },
               removed = { fg = colors.red },
             },
-            separator = { right = "" },
+            separator = { left = left_sep, right = right_sep },
             padding = { left = 0, right = 1 },
           },
         },
@@ -142,18 +146,18 @@ return {
             },
             color = { fg = colors.text, gui = "italic" },
             padding = { left = 1, right = 0 },
+            separator = { left = left_sep, right = right_sep },
           },
           {
             "diagnostics",
             sources = { "nvim_diagnostic" },
             sections = { "error", "warn", "info", "hint" },
             symbols = {
-              error = " ", -- or 󰅙
-              warn = " ", -- or 󰀦
-              info = " ", -- or 󰋽
-              hint = " ", -- or 󰌵
+              error = " ",
+              warn = " ",
+              info = " ",
+              hint = " ",
             },
-
             diagnostics_color = {
               error = { fg = colors.red },
               warn = { fg = colors.yellow },
@@ -164,6 +168,7 @@ return {
             update_in_insert = false,
             always_visible = false,
             padding = { left = 1, right = 0 },
+            separator = { left = left_sep, right = right_sep },
           },
         },
         lualine_x = {
@@ -180,18 +185,20 @@ return {
             end,
             color = { fg = colors.subtext1, gui = "italic" },
             padding = { left = 1, right = 1 },
+            separator = { left = left_sep, right = right_sep },
           },
           {
             "encoding",
             fmt = string.upper,
             color = { fg = colors.green },
-            separator = { left = "" },
+            separator = { left = left_sep, right = right_sep },
             padding = { left = 1, right = 0 },
           },
           {
             "fileformat",
             symbols = { unix = "󰻀", dos = "󰨡", mac = "󰀵" },
             color = { fg = colors.sky },
+            separator = { left = left_sep, right = right_sep },
             padding = { left = 1, right = 0 },
           },
           {
@@ -199,7 +206,7 @@ return {
             icon_only = false,
             icon = { align = "right" },
             color = { fg = colors.lavender, gui = "bold" },
-            separator = { left = "", right = "" },
+            separator = { left = left_sep, right = right_sep },
             padding = { left = 1, right = 1 },
           },
         },
@@ -210,7 +217,7 @@ return {
               return "󰉸 " .. str
             end,
             color = { gui = "bold" },
-            separator = { left = "", right = "" },
+            separator = { left = left_sep, right = right_sep },
             padding = { left = 1, right = 1 },
           },
         },
@@ -220,7 +227,7 @@ return {
             fmt = function(str)
               return "󰍉 " .. str
             end,
-            separator = { left = "", right = "" },
+            separator = { left = left_sep, right = right_sep },
             padding = { left = 1, right = 1 },
           },
         },
@@ -235,12 +242,14 @@ return {
             path = 1,
             color = { fg = colors.overlay1 },
             symbols = { modified = " ●", readonly = " " },
+            separator = { left = left_sep, right = right_sep },
           },
         },
         lualine_x = {
           {
             "location",
             color = { fg = colors.overlay1 },
+            separator = { left = left_sep, right = right_sep },
           },
         },
         lualine_y = {},
