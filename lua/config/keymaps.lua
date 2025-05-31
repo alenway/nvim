@@ -6,6 +6,9 @@
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
 
+-- Redo command
+vim.keymap.set("n", "U", "<C-r>", { desc = "Redo" })
+
 -- Snacks Explorer
 
 -- git ui terminal keybinding
