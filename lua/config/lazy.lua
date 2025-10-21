@@ -18,14 +18,20 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    { import = "plugins" },
+    { import = "plugins" }, -- your custom plugins folder
   },
   defaults = {
-    lazy = false,
-    version = false,
+    lazy = false, -- load plugins immediately
+    version = false, -- always use latest git commit
   },
-  install = { colorscheme = { "catppuccin" } }, -- This ensures Catppuccin is used during installation
-  checker = { enabled = true },
+  install = {
+    missing = true, -- auto-install missing plugins
+    colorscheme = { "catppuccin" },
+  },
+  checker = {
+    enabled = true, -- periodic update checks
+    notify = false, -- disable popup notifications
+  },
   performance = {
     rtp = {
       disabled_plugins = {
