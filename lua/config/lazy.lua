@@ -30,7 +30,7 @@ require("lazy").setup({
                   opts = {
                         window = {
                               position = "right",
-                              width = 40,
+                              width = 30,
                         },
                   },
             },
