@@ -24,17 +24,6 @@ require("lazy").setup({
             -- Custom Plugins
             { import = "plugins" }, -- your own plugins folder
 
-            -- Aura Theme
-            {
-                  "daltonmenezes/aura-theme",
-                  lazy = false,
-                  priority = 1000,
-                  config = function()
-                        vim.o.background = "dark" -- or "light"
-                        vim.cmd.colorscheme("aura")
-                  end,
-            },
-
             -- Neo-tree custom config (right side, width 40)
             {
                   "nvim-neo-tree/neo-tree.nvim",
@@ -54,7 +43,7 @@ require("lazy").setup({
 
       install = {
             missing = true,
-            colorscheme = { "aura" }, -- default colorscheme
+            colorscheme = { "rose-pine" }, -- default colorscheme
       },
 
       checker = {
