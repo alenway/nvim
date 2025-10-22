@@ -8,18 +8,20 @@ return {
                   sections = {
                         { -- ASCII Header
                               header = [[
-    ███╗   ██╗███████╗ ██████╗ ██╗   ██╗ ██████╗ ██╗██████╗ 
-    ████╗  ██║██╔════╝██╔═══██╗██║   ██║██╔═══██╗██║██╔══██╗
-    ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║   ██║██║██║  ██║
-    ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║   ██║██║██║  ██║
-    ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ╚██████╔╝██║██████╔╝
-    ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝   ╚═════╝ ╚═╝╚═════╝ 
+    ███╗   ███╗ █████╗ ██╗  ██╗██████╗ ███████╗███╗   ██╗
+    ████╗ ████║██╔══██╗██║ ██╔╝██╔══██╗██╔════╝████╗  ██║
+    ██╔████╔██║███████║█████╔╝ ██████╔╝█████╗  ██╔██╗ ██║
+    ██║╚██╔╝██║██╔══██║██╔═██╗ ██╔══██╗██╔══╝  ██║╚██╗██║
+    ██║ ╚═╝ ██║██║  ██║██║  ██╗██║  ██║███████╗██║ ╚████║
+    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝
           ]],
+                              hl = "SnacksDashboardHeader",
+                              padding = 1,
                         },
                         { section = "keys", gap = 1, padding = 1 },
                         {
                               pane = 2,
-                              icon = " ",
+                              icon = " ",
                               desc = "Browse Repo",
                               padding = 1,
                               key = "b",
@@ -29,13 +31,13 @@ return {
                         },
                         {
                               pane = 2,
-                              icon = " ",
+                              icon = " ",
                               title = "Recent Files",
                               section = "recent_files",
                               indent = 2,
                               padding = 1,
                         },
-                        { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+                        { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 
                         -- GitHub + Git Status blocks
                         function()
@@ -48,7 +50,7 @@ return {
                                                 vim.ui.open("https://github.com/notifications")
                                           end,
                                           key = "n",
-                                          icon = " ",
+                                          icon = " ",
                                           height = 5,
                                           enabled = true,
                                     },
@@ -59,11 +61,11 @@ return {
                                           action = function()
                                                 vim.fn.jobstart("gh issue list --web", { detach = true })
                                           end,
-                                          icon = " ",
+                                          icon = " ",
                                           height = 7,
                                     },
                                     {
-                                          icon = " ",
+                                          icon = " ",
                                           title = "Open PRs",
                                           cmd = "gh pr list -L 3",
                                           key = "P",
@@ -73,7 +75,7 @@ return {
                                           height = 7,
                                     },
                                     {
-                                          icon = " ",
+                                          icon = " ",
                                           title = "Git Status",
                                           cmd = "git --no-pager diff --stat -B -M -C",
                                           height = 10,
@@ -93,7 +95,7 @@ return {
 
                         {
                               pane = 2,
-                              icon = " ",
+                              icon = " ",
                               title = "Quick Commands",
                               section = "terminal",
                               cmd = "echo 'Press <leader>sf for files, <leader>sg for git, <leader>sw for search'",
@@ -150,6 +152,21 @@ return {
 
       config = function(_, opts)
             require("snacks").setup(opts)
+
+            -- Set custom highlight for dashboard header
+            vim.api.nvim_create_autocmd("VimEnter", {
+                  callback = function()
+                        vim.api.nvim_set_hl(0, "SnacksDashboardHeader", {
+                              fg = "#9ccfd8",
+                              bold = true,
+                        })
+                  end,
+            })
+
+            vim.api.nvim_set_hl(0, "SnacksDashboardHeader", {
+                  fg = "#9ccfd8",
+                  bold = true,
+            })
 
             -- Prevent accidental exit in picker
             vim.api.nvim_create_autocmd("FileType", {
