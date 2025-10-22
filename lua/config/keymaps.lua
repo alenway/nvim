@@ -6,6 +6,20 @@
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
 
+-- Dashboard command
+-- Remap <leader>qa to open dashboard instead of quitting
+vim.keymap.set("n", "<leader>qa", function()
+  -- Optional: close all buffers first
+  vim.cmd("bufdo bd")
+
+  local ok, snacks = pcall(require, "snacks.dashboard")
+  if ok and snacks then
+    pcall(snacks.open)
+  else
+    print("Snacks dashboard not available")
+  end
+end, { desc = "Return to Dashboard", noremap = true, silent = true })
+
 -- Redo command
 vim.keymap.set("n", "U", "<C-r>", { desc = "Redo" })
 
