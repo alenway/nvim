@@ -142,7 +142,7 @@ return {
                                           "branch",
                                           separator = { left = left_sep, right = right_sep },
                                           padding = { left = 1, right = 1 },
-                                          icon = "",
+                                          icon = "󰘬",
                                           color = { gui = "bold" },
                                     },
                                     {
