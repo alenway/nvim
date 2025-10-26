@@ -1,14 +1,12 @@
--- ~/.config/nvim/lua/plugins/lualine.lua
 return {
       {
             "nvim-lualine/lualine.nvim",
+            dependencies = { "nvim-tree/nvim-web-devicons" },
             config = function()
                   local left_sep = ""
                   local right_sep = ""
 
-                  -- Rose Pine Color Palette
                   local colors = {
-                        -- Rose Pine Main colors
                         base = "#191724",
                         surface = "#1f1d2e",
                         overlay = "#26233a",
@@ -21,9 +19,6 @@ return {
                         pine = "#31748f",
                         foam = "#9ccfd8",
                         iris = "#c4a7e7",
-                        highlight_low = "#21202e",
-                        highlight_med = "#403d52",
-                        highlight_high = "#524f67",
                   }
 
                   local rosepine_custom = {
@@ -31,29 +26,22 @@ return {
                               a = { bg = colors.foam, fg = colors.base, gui = "bold" },
                               b = { bg = colors.overlay, fg = colors.foam },
                               c = { bg = colors.surface, fg = colors.text },
-                              x = { bg = colors.surface, fg = colors.text },
-                              y = { bg = colors.overlay, fg = colors.subtle },
-                              z = { bg = colors.foam, fg = colors.base, gui = "bold" },
                         },
                         insert = {
                               a = { bg = colors.pine, fg = colors.text, gui = "bold" },
                               b = { bg = colors.overlay, fg = colors.pine },
-                              z = { bg = colors.pine, fg = colors.text, gui = "bold" },
                         },
                         visual = {
                               a = { bg = colors.iris, fg = colors.base, gui = "bold" },
                               b = { bg = colors.overlay, fg = colors.iris },
-                              z = { bg = colors.iris, fg = colors.base, gui = "bold" },
                         },
                         replace = {
                               a = { bg = colors.love, fg = colors.text, gui = "bold" },
                               b = { bg = colors.overlay, fg = colors.love },
-                              z = { bg = colors.love, fg = colors.text, gui = "bold" },
                         },
                         command = {
                               a = { bg = colors.gold, fg = colors.base, gui = "bold" },
                               b = { bg = colors.overlay, fg = colors.gold },
-                              z = { bg = colors.gold, fg = colors.base, gui = "bold" },
                         },
                         inactive = {
                               a = { bg = colors.overlay, fg = colors.muted },
@@ -66,14 +54,13 @@ return {
                         options = {
                               theme = rosepine_custom,
                               icons_enabled = true,
+                              component_separators = { left = "", right = "" },
                               section_separators = { left = left_sep, right = right_sep },
-                              component_separators = { left = left_sep, right = right_sep },
                               globalstatus = true,
                               disabled_filetypes = {
-                                    statusline = { "alpha", "dashboard" },
-                                    winbar = {},
+                                    statusline = { "alpha", "dashboard", "starter" },
                               },
-                              ignore_focus = { "neo-tree", "nvim-tree" },
+                              ignore_focus = { "neo-tree", "nvim-tree", "NvimTree" },
                               refresh = {
                                     statusline = 1000,
                                     tabline = 1000,
@@ -83,23 +70,45 @@ return {
                         sections = {
                               lualine_a = {
                                     {
-                                          "mode",
+                                          function()
+                                                local mode = vim.fn.mode(1)
+                                                local mode_map = {
+                                                      n = "󰋜 NOR",
+                                                      no = "󰋜 O-P",
+                                                      nov = "󰋜 O-P",
+                                                      noV = "󰋜 O-P",
+                                                      ["no\22"] = "󰋜 O-P",
+                                                      niI = "󰋜 NOR",
+                                                      niR = "󰋜 NOR",
+                                                      niV = "󰋜 NOR",
+                                                      i = "󰏫 INS",
+                                                      ic = "󰏫 INS",
+                                                      ix = "󰏫 INS",
+                                                      R = "󰛔 REP",
+                                                      Rc = "󰛔 REP",
+                                                      Rx = "󰛔 REP",
+                                                      Rv = "󰛔 REP",
+                                                      Rvc = "󰛔 REP",
+                                                      Rvx = "󰛔 REP",
+                                                      v = "󰈈 VIS",
+                                                      V = "󰈈 V-L",
+                                                      ["\22"] = "󰈈 V-B",
+                                                      ["\22c"] = "󰈈 V-B",
+                                                      s = "󰒅 SEL",
+                                                      S = "󰒅 S-L",
+                                                      ["\19"] = "󰒅 S-B",
+                                                      c = "󰘳 CMD",
+                                                      cv = "󰘳 CMD",
+                                                      r = "󰁜 PRO",
+                                                      rm = "󰘳 CMD",
+                                                      ["r?"] = "󰘳 CMD",
+                                                      ["!"] = "󰞷 TER",
+                                                      t = "󰞷 TER",
+                                                }
+                                                return mode_map[mode] or ("󰋜 " .. mode)
+                                          end,
                                           separator = { left = left_sep, right = right_sep },
                                           padding = { left = 1, right = 1 },
-                                          fmt = function(str)
-                                                local map = {
-                                                      NORMAL = "󰋜 NOR",
-                                                      INSERT = "󰏫 INS",
-                                                      VISUAL = "󰈈 VIS",
-                                                      ["V-LINE"] = "󰈈 V-L",
-                                                      ["V-BLOCK"] = "󰈈 V-B",
-                                                      COMMAND = "󰘳 CMD",
-                                                      REPLACE = "󰛔 REP",
-                                                      TERMINAL = "󰞷 TER",
-                                                      SELECT = "󰒅 SEL",
-                                                }
-                                                return map[str] or str
-                                          end,
                                     },
                               },
                               lualine_b = {
@@ -107,14 +116,20 @@ return {
                                           "branch",
                                           separator = { left = left_sep, right = right_sep },
                                           padding = { left = 1, right = 1 },
+                                          icon = "󰘬",
                                           color = { gui = "bold" },
                                     },
                                     {
                                           "diff",
+                                          separator = { left = left_sep, right = right_sep },
+                                          padding = { left = 1, right = 1 },
+                                          symbols = { added = " ", modified = " ", removed = " " },
+                                          diff_color = {
+                                                added = { fg = colors.foam },
+                                                modified = { fg = colors.gold },
+                                                removed = { fg = colors.love },
+                                          },
                                           source = function()
-                                                if not vim.b.gitsigns_head or vim.b.gitsigns_git_status then
-                                                      return
-                                                end
                                                 local gs = vim.b.gitsigns_status_dict
                                                 if gs then
                                                       return {
@@ -123,42 +138,37 @@ return {
                                                             removed = gs.removed,
                                                       }
                                                 end
+                                                return {}
                                           end,
-                                          symbols = { added = "+", modified = "~", removed = "-" },
-                                          diff_color = {
-                                                added = { fg = colors.foam },
-                                                modified = { fg = colors.gold },
-                                                removed = { fg = colors.love },
-                                          },
-                                          separator = { left = left_sep, right = right_sep },
-                                          padding = { left = 1, right = 1 },
                                     },
                               },
                               lualine_c = {
                                     {
                                           "filename",
+                                          separator = { left = left_sep, right = right_sep },
+                                          padding = { left = 1, right = 1 },
                                           file_status = true,
                                           path = 1,
                                           shorting_target = 40,
                                           symbols = {
-                                                modified = "[+]",
-                                                readonly = "[-]",
+                                                modified = " ",
+                                                readonly = " ",
                                                 unnamed = "[No Name]",
                                                 newfile = "[New]",
                                           },
                                           color = { fg = colors.text, gui = "italic" },
-                                          padding = { left = 1, right = 1 },
-                                          separator = { left = left_sep, right = right_sep },
                                     },
                                     {
                                           "diagnostics",
+                                          separator = { left = left_sep, right = right_sep },
+                                          padding = { left = 1, right = 1 },
                                           sources = { "nvim_diagnostic" },
                                           sections = { "error", "warn", "info", "hint" },
                                           symbols = {
-                                                error = " ",
-                                                warn = " ",
-                                                info = " ",
-                                                hint = " ",
+                                                error = " ",
+                                                warn = " ",
+                                                info = " ",
+                                                hint = "󰌵 ",
                                           },
                                           diagnostics_color = {
                                                 error = { fg = colors.love },
@@ -166,70 +176,60 @@ return {
                                                 info = { fg = colors.foam },
                                                 hint = { fg = colors.iris },
                                           },
-                                          colored = true,
                                           update_in_insert = false,
                                           always_visible = false,
-                                          padding = { left = 1, right = 1 },
-                                          separator = { left = left_sep, right = right_sep },
                                     },
                               },
                               lualine_x = {
                                     {
                                           function()
                                                 local clients = vim.lsp.get_clients({ bufnr = 0 })
-                                                if next(clients) == nil then
+                                                if #clients == 0 then
                                                       return ""
                                                 end
-                                                local client_names = {}
+                                                local names = {}
                                                 for _, client in ipairs(clients) do
                                                       if client.name ~= "null-ls" and client.name ~= "copilot" then
-                                                            table.insert(client_names, client.name)
+                                                            table.insert(names, client.name)
                                                       end
                                                 end
-                                                return " " .. table.concat(client_names, ", ")
+                                                return #names > 0 and " " .. table.concat(names, ", ") or ""
                                           end,
-                                          color = { fg = colors.subtle, gui = "italic" },
-                                          padding = { left = 1, right = 1 },
                                           separator = { left = left_sep, right = right_sep },
+                                          padding = { left = 1, right = 1 },
+                                          color = { fg = colors.subtle, gui = "italic" },
                                     },
                                     {
                                           "encoding",
-                                          fmt = function(symbol)
-                                                local ff = vim.bo.fileformat
-                                                return symbol
-                                          end,
-                                          color = { fg = colors.foam },
                                           separator = { left = left_sep, right = right_sep },
                                           padding = { left = 1, right = 1 },
+                                          fmt = string.upper,
+                                          color = { fg = colors.foam },
                                     },
                                     {
                                           "filetype",
+                                          separator = { left = left_sep, right = right_sep },
+                                          padding = { left = 1, right = 1 },
                                           icon_only = false,
                                           colored = true,
                                           color = { fg = colors.rose, gui = "bold" },
-                                          separator = { left = left_sep, right = right_sep },
-                                          padding = { left = 1, right = 1 },
                                     },
                               },
                               lualine_y = {
                                     {
                                           "progress",
-                                          fmt = function(str)
-                                                return "󰉸 " .. str
-                                          end,
-                                          color = { gui = "bold" },
                                           separator = { left = left_sep, right = right_sep },
                                           padding = { left = 1, right = 1 },
+                                          icon = "󰉸",
+                                          color = { gui = "bold" },
                                     },
                               },
                               lualine_z = {
                                     {
                                           "location",
-                                          fmt = function(str)
-                                                return "󰍉 " .. str
-                                          end,
                                           separator = { left = left_sep, right = right_sep },
                                           padding = { left = 1, right = 1 },
+                                          icon = "󰍉",
                                     },
                               },
                         },
@@ -239,25 +239,26 @@ return {
                               lualine_c = {
                                     {
                                           "filename",
+                                          separator = { left = left_sep, right = right_sep },
+                                          padding = { left = 1, right = 1 },
                                           file_status = true,
                                           path = 1,
                                           color = { fg = colors.muted },
                                           symbols = { modified = "[+]", readonly = "[-]" },
-                                          separator = { left = left_sep, right = right_sep },
                                     },
                               },
                               lualine_x = {
                                     {
                                           "location",
-                                          color = { fg = colors.muted },
                                           separator = { left = left_sep, right = right_sep },
+                                          padding = { left = 1, right = 1 },
+                                          color = { fg = colors.muted },
                                     },
                               },
                               lualine_y = {},
                               lualine_z = {},
                         },
-                        tabline = {},
-                        extensions = { "nvim-tree", "fugitive", "quickfix" },
+                        extensions = { "neo-tree", "nvim-tree", "fugitive", "quickfix" },
                   })
             end,
       },
