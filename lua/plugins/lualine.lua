@@ -196,7 +196,6 @@ return {
                                           "encoding",
                                           fmt = function(symbol)
                                                 local ff = vim.bo.fileformat
-                                                print("Detected fileformat:", ff)
                                                 return symbol
                                           end,
                                           color = { fg = colors.foam },
