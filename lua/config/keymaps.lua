@@ -2,6 +2,10 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- set this at the very top of your config
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- Map 'jk' to escape from Insert mode to Normal mode:
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
@@ -9,15 +13,15 @@ vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
 -- Dashboard command
 -- Remap <leader>qa to open dashboard instead of quitting
 vim.keymap.set("n", "<leader>qa", function()
-  -- Optional: close all buffers first
-  vim.cmd("bufdo bd")
+      -- Optional: close all buffers first
+      vim.cmd("bufdo bd")
 
-  local ok, snacks = pcall(require, "snacks.dashboard")
-  if ok and snacks then
-    pcall(snacks.open)
-  else
-    print("Snacks dashboard not available")
-  end
+      local ok, snacks = pcall(require, "snacks.dashboard")
+      if ok and snacks then
+            pcall(snacks.open)
+      else
+            print("Snacks dashboard not available")
+      end
 end, { desc = "Return to Dashboard", noremap = true, silent = true })
 
 -- Redo command
@@ -32,25 +36,33 @@ vim.api.nvim_set_keymap("n", "<leader>gu", ":terminal gitui<CR>", { noremap = tr
 -- lf command
 
 vim.keymap.set("n", "<leader>rf", function()
-  vim.cmd("botright new") -- open a new split
-  vim.cmd("terminal lf") -- run lf in it
-  vim.cmd("startinsert") -- go into terminal mode
+      vim.cmd("botright new") -- open a new split
+      vim.cmd("terminal lf") -- run lf in it
+      vim.cmd("startinsert") -- go into terminal mode
 end, { desc = "Open lf file manager" })
 
 -- ranger command
 
 vim.keymap.set("n", "<leader>rr", function()
-  vim.cmd("botright new")
-  vim.cmd("terminal ranger")
-  vim.cmd("startinsert")
+      vim.cmd("botright new")
+      vim.cmd("terminal ranger")
+      vim.cmd("startinsert")
 end, { desc = "Open ranger file manager" })
 
 -- yazi file manager keybinding
 vim.keymap.set("n", "<leader>ry", function()
-  -- Open a new scratch buffer in a split
-  vim.cmd("botright split")
-  vim.cmd("enew") -- create a new, empty, unmodified buffer
-  vim.cmd("setlocal nobuflisted bufhidden=wipe")
-  vim.cmd("terminal yazi")
-  vim.cmd("startinsert")
+      -- Open a new scratch buffer in a split
+      vim.cmd("botright split")
+      vim.cmd("enew") -- create a new, empty, unmodified buffer
+      vim.cmd("setlocal nobuflisted bufhidden=wipe")
+      vim.cmd("terminal yazi")
+      vim.cmd("startinsert")
 end, { desc = "Open Yazi in terminal" })
+
+vim.keymap.set("n", "<leader>fw", function()
+      require("telescope.builtin").find_files({ cwd = "~/vimwiki" })
+end, { desc = "Find Vimwiki files" })
+
+vim.keymap.set("n", "<leader>sw", function()
+      require("telescope.builtin").live_grep({ cwd = "~/vimwiki" })
+end, { desc = "Search Vimwiki content" })
