@@ -66,3 +66,8 @@ end, { desc = "Find Vimwiki files" })
 vim.keymap.set("n", "<leader>sw", function()
       require("telescope.builtin").live_grep({ cwd = "~/vimwiki" })
 end, { desc = "Search Vimwiki content" })
+
+-- ===============================================
+-- Optional: ZenMode keybinding (from snacks plugin)
+-- ===============================================
+vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Toggle Zen Mode" })

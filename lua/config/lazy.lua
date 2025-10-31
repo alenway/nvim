@@ -1,5 +1,8 @@
 -- ~/.config/nvim/lua/config/lazy.lua
 
+-- Set local leader BEFORE loading any plugins
+vim.g.maplocalleader = "\\"
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
       vim.fn.system({
@@ -75,8 +78,3 @@ vim.api.nvim_create_autocmd("FileType", {
             vim.opt_local.tabstop = 6
       end,
 })
-
--- ===============================================
--- Optional: ZenMode keybinding (from snacks plugin)
--- ===============================================
-vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Toggle Zen Mode" })
