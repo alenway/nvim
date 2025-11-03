@@ -7,8 +7,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Map 'jk' to escape from Insert mode to Normal mode:
-vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
+vim.keymap.set("i", "jk", "<Esc>", { noremap = true, silent = true, desc = "Exit insert mode with jk" })
+vim.keymap.set("i", "jj", "<Esc>", { noremap = true, silent = true, desc = "Exit insert mode with jj" })
 
 -- Dashboard command
 -- Remap <leader>qa to open dashboard instead of quitting

@@ -1,12 +1,12 @@
 return {
       {
-            "nvim-lualine/lualine.nvim", -- any always-loaded plugin to hook into
-            config = function()
-                  local timer = vim.loop.new_timer()
+            "LazyVim/LazyVim", -- loads early and always
+            init = function()
+                  local timer = vim.uv.new_timer() -- newer API alias for vim.loop
 
                   vim.api.nvim_create_autocmd("InsertEnter", {
                         callback = function()
-                              vim.opt.guicursor = "n-v-c:block,i:hor0" -- hide in insert
+                              vim.opt.guicursor = "n-v-c:block,i:hor0" -- hide cursor while typing
                         end,
                   })
 
@@ -18,7 +18,7 @@ return {
                                           500,
                                           0,
                                           vim.schedule_wrap(function()
-                                                vim.opt.guicursor = "n-v-c:block,i:ver25" -- restore after delay
+                                                vim.opt.guicursor = "n-v-c:block,i:ver25" -- restore cursor after delay
                                           end)
                                     )
                               end

@@ -27,12 +27,43 @@ return {
 
                   local on_attach = function(_, bufnr)
                         local opts = { buffer = bufnr, silent = true }
-                        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-                        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-                        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-                        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+
+                        vim.keymap.set(
+                              "n",
+                              "gd",
+                              vim.lsp.buf.definition,
+                              vim.tbl_extend("force", opts, { desc = "Go to definition" })
+                        )
+                        vim.keymap.set(
+                              "n",
+                              "gr",
+                              vim.lsp.buf.references,
+                              vim.tbl_extend("force", opts, { desc = "Find references" })
+                        )
+                        vim.keymap.set(
+                              "n",
+                              "K",
+                              vim.lsp.buf.hover,
+                              vim.tbl_extend("force", opts, { desc = "Show hover documentation" })
+                        )
+                        vim.keymap.set(
+                              "n",
+                              "<leader>rn",
+                              vim.lsp.buf.rename,
+                              vim.tbl_extend("force", opts, { desc = "Rename symbol" })
+                        )
+
+                        vim.keymap.set("n", "[d", function()
+                              vim.diagnostic.jump({ count = -1 })
+                        end, vim.tbl_extend(
+                              "force",
+                              opts,
+                              { desc = "Go to previous diagnostic" }
+                        ))
+
+                        vim.keymap.set("n", "]d", function()
+                              vim.diagnostic.jump({ count = 1 })
+                        end, vim.tbl_extend("force", opts, { desc = "Go to next diagnostic" }))
                   end
 
                   vim.diagnostic.config({
